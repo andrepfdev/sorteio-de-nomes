@@ -40,8 +40,7 @@
             <input 
                 type="file" 
                 id="fileUpload" 
-                accept=".csv,.txt" 
-                aria-describedby="file-upload-hint"
+                accept=".csv,.txt"
                 class="text-sm text-gray-500 
                     file:mr-4 file:py-2 file:px-4
                     file:rounded-full file:border-0
@@ -49,7 +48,7 @@
                     file:bg-violet-50 file:text-violet-700
                     hover:file:bg-violet-100"
             >
-            <span id="file-upload-hint" class="text-sm text-gray-600"></span>
+            <span id="fileInfo" class="text-sm text-gray-600"></span>
         </div>
         
         <label for="namesInput" class="sr-only"> Digite ou cole os nomes para sorteio</label>
@@ -73,7 +72,7 @@
             >
         </div>
         
-        <div class="flex space-x-4 justify-center">
+        <div class="flex space-x-4 justify-center pb-4">
             <button 
                 id="drawButton" 
                 aria-label="Realizar sorteio"
@@ -153,7 +152,6 @@
         // Função para processar arquivo CSV ou TXT (mantida do código anterior)
         function processFile(file) {
             const reader = new FileReader();
-
             reader.onload = function (e) {
                 const content = e.target.result;
 
@@ -171,7 +169,7 @@
                 }
 
                 $('#namesInput').val(names.join('\n'));
-                $('#fileInfo').text(`${file.name} - ${names.length} nomes carregados`);
+                $('#fileInfo').text(`${names.length} nomes carregados`);
             };
 
             reader.readAsText(file);
