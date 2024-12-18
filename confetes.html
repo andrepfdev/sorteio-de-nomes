@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Metadados SEO -->
+    <title>Sorteador de Nomes Online - Faça Sorteios Rápidos e Fáceis</title>
+    <meta name="description"
+        content="Ferramenta gratuita para sortear nomes de forma simples e rápida. Carregue arquivos CSV ou TXT, ou digite os nomes manualmente. Ideal para sorteios, eventos e seleções aleatórias.">
+    <meta name="keywords" content="sorteador, sorteio de nomes, gerador aleatório, sorteio online, escolha aleatória">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4"
+    aria-description="Aplicativo para sorteio de nomes">
+    <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-6" role="main" aria-label="Área de sorteio de nomes">
+        <h1 class="text-2xl font-bold text-center mb-6 text-gray-800" id="page-title">
+            Sorteador de Nomes
+        </h1>
+
+        <div class="mb-4 flex justify-center items-center space-x-4">
+            <label for="fileUpload" class="sr-only">
+                Carregar arquivo de nomes
+            </label>
+            <input type="file" id="fileUpload" accept=".csv,.txt" aria-describedby="file-upload-hint" class="text-sm text-gray-500 
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-violet-50 file:text-violet-700
+                    hover:file:bg-violet-100">
+            <span id="file-upload-hint" class="text-sm text-gray-600"></span>
+        </div>
+
+        <label for="namesInput" class="sr-only">
+            Digite ou cole os nomes para sorteio
+        </label>
+        <textarea id="namesInput" placeholder="Digite os nomes (um por linha ou separados por vírgula)"
+            aria-describedby="names-input-hint"
+            class="w-full h-32 p-2 mb-4 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-violet-300"></textarea>
+        <p id="names-input-hint" class="text-xs text-gray-500 mb-2">
+            Insira um nome por linha ou separados por vírgula
+        </p>
+
+        <div class="flex items-center justify-between mb-4">
+            <label for="drawCount" class="text-sm text-gray-700 mr-2">
+                Quantidade de nomes:
+            </label>
+            <input type="number" id="drawCount" min="1" value="1" aria-label="Número de nomes a sortear"
+                class="w-20 p-2 border rounded-md text-center">
+        </div>
+
+        <div class="flex space-x-4 justify-center">
+            <button id="drawButton" aria-label="Realizar sorteio"
+                class="bg-violet-600 text-white py-2 px-4 rounded-md hover:bg-violet-700 transition duration-300">
+                Sortear
+            </button>
+            <button id="clearButton" aria-label="Limpar lista de nomes"
+                class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300 transition duration-300">
+                Limpar Nomes
+            </button>
+        </div>
+
+        <div id="resultArea" aria-live="polite" aria-relevant="additions"
+            class="mt-6 flex flex-wrap justify-center gap-2"></div>
+    </div>
+
+    <!-- Biblioteca de Confetes -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Função de confete com diferentes efeitos
+        function fireConfetti(type = 'default') {
+            const configs = {
+                default: {
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                },
+                burst: {
+                    particleCount: 200,
+                    spread: 140,
+                    startVelocity: 30,
+                    origin: { y: 0.6 }
+                },
+                cannon: {
+                    particleCount: 300,
+                    spread: 180,
+                    angle: 60,
+                    origin: { x: 0, y: 0.6 }
+                }
+            };
+
+            const colors = [
+                '#26ccff', '#a25afd', '#ff5e7e',
+                '#88ff5a', '#fcff42', '#ffa62b'
+            ];
+
+            confetti({
+                ...configs[type],
+                colors: colors,
+                // Adiciona alguns efeitos de partículas diferentes
+                shapes: ['square', 'circle'],
+                scalar: 1.2
+            });
+        }
+
+        // Função para processar arquivo CSV ou TXT (mantida do código anterior)
+        function processFile(file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const content = e.target.result;
+
+                // Detecta separador (virgula ou nova linha)
+                let names;
+                if (file.name.endsWith('.csv')) {
+                    names = content.split(/\r?\n/)
+                        .map(line => line.split(',').map(name => name.trim()))
+                        .flat()
+                        .filter(name => name !== '');
+                } else {
+                    names = content.split(/\r?\n/)
+                        .map(name => name.trim())
+                        .filter(name => name !== '');
+                }
+
+                $('#namesInput').val(names.join('\n'));
+                $('#fileInfo').text(`${file.name} - ${names.length} nomes carregados`);
+            };
+
+            reader.readAsText(file);
+        }
+
+        // Evento de upload de arquivo
+        $('#fileUpload').on('change', function (e) {
+            const file = e.target.files[0];
+
+            if (file) {
+                const validExtensions = ['csv', 'txt'];
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                if (validExtensions.includes(fileExtension)) {
+                    processFile(file);
+                } else {
+                    alert('Por favor, selecione apenas arquivos CSV ou TXT');
+                    this.value = '';
+                    $('#fileInfo').text('');
+                }
+            }
+        });
+
+        // Botão de limpar nomes
+        $('#clearButton').on('click', function () {
+            $('#namesInput').val('');
+            $('#fileUpload').val('');
+            $('#fileInfo').text('');
+            $('#resultArea').empty();
+        });
+
+        // Função de sorteio
+        $('#drawButton').on('click', function () {
+            // Limpar resultados anteriores
+            $('#resultArea').empty();
+
+            // Obter os nomes e processá-los
+            let namesInput = $('#namesInput').val();
+            let names = namesInput.includes(',')
+                ? namesInput.split(',').map(name => name.trim())
+                : namesInput.split('\n').map(name => name.trim());
+
+            // Remover nomes vazios
+            names = names.filter(name => name !== '');
+
+            // Validar entrada
+            if (names.length === 0) {
+                alert('Por favor, insira alguns nomes!');
+                return;
+            }
+
+            // Obter quantidade de nomes a sortear
+            let drawCount = parseInt($('#drawCount').val());
+            drawCount = Math.min(drawCount, names.length);
+
+            // Função para sortear nomes únicos
+            function drawUniqueNames(names, count) {
+                let shuffled = names.slice();
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                return shuffled.slice(0, count);
+            }
+
+            // Sortear nomes
+            let drawnNames = drawUniqueNames(names, drawCount);
+
+            // Diferentes efeitos de confete
+            if (drawCount === 1) {
+                fireConfetti('default');
+            } else if (drawCount <= 3) {
+                fireConfetti('burst');
+            } else {
+                fireConfetti('cannon');
+            }
+
+            // Exibir nomes sorteados com animação
+            drawnNames.forEach((name, index) => {
+                setTimeout(() => {
+                    let nameElement = $('<div>')
+                        .addClass('bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded-full opacity-0 transition-opacity duration-500')
+                        .text(name);
+
+                    $('#resultArea').append(nameElement);
+
+                    // Trigger reflow to enable transition
+                    nameElement[0].offsetWidth;
+
+                    // Fade in
+                    nameElement.removeClass('opacity-0');
+                }, index * 500); // Delay entre cada nome
+            });
+        });
+    });
+</script>
+</body>
+
+</html>
