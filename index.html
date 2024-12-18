@@ -23,91 +23,164 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Acessibilidade e Performance -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4" aria-description="Aplicativo para sorteio de nomes">
-    <div class="w-full max-w-lg bg-white shadow rounded-xl p-6" role="main" aria-label="Área de sorteio de nomes">
-        <div class="flex justify-center items-center">
-            <img width="75" height="75" style="margin-left: -15px;" src="/img/logo.png"/>
-            <h1 class="text-3xl mt-6 text-violet-700 font-bold text-center mb-6 text-gray-600" id="page-title">Sorteio de Nomes</h1>
-        </div>      
-        <h3 class="text-center text-gray-500 pb-4">Carregue arquivos .csv ou .txt.</h3>
-        <div class="mb-4 flex justify-center items-center space-x-4">
-            
-            <label for="fileUpload" class="sr-only">Carregar arquivo de nomes</label>
-            <input 
-                type="file" 
-                id="fileUpload" 
-                accept=".csv,.txt"
-                class="text-sm text-gray-500 
-                    file:mr-4 file:py-2 file:px-4
-                    file:rounded-full file:border-0
-                    file:text-sm file:font-semibold
-                    file:bg-violet-50 file:text-violet-700
-                    hover:file:bg-violet-100"
-            >
-            <span id="fileInfo" class="text-sm text-gray-600"></span>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Topbar Responsiva -->
+    <nav class="bg-violet-700 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="/"><img width="50" height="50" src="https://img.icons8.com/external-others-nixx-design/67/FFFFFF/external-dice-game-solid-others-nixx-design.png" alt="Logo Sorteador de Nomes"/></a>
+            </div>
+            <div class="hidden md:flex space-x-4">
+                <a href="/" class="hover:text-violet-200 transition">Home</a>
+                <a href="#como-usar" class="hover:text-violet-200 transition">Como Usar</a>
+                <a href="#faq" class="hover:text-violet-200 transition">FAQ</a>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <div class="md:hidden">
+                <button id="mobile-menu-toggle" class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
         </div>
-        
-        <label for="namesInput" class="sr-only"> Digite ou cole os nomes para sorteio</label>
-        <textarea 
-            id="namesInput" 
-            placeholder="Digite os nomes (um por linha ou separados por vírgula)"
-            aria-describedby="names-input-hint"
-            class="w-full h-32 p-2 mb-4 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-violet-300"
-        ></textarea>
-        <p id="names-input-hint" class="text-xs text-gray-500 mb-2">Insira um nome por linha ou separados por vírgula</p>
-        
-        <div class="flex items-center justify-between mb-4">
-            <label for="drawCount" class="text-sm text-gray-700 mr-2">Quantidade de nomes:</label>
-            <input 
-                type="number" 
-                id="drawCount" 
-                min="1" 
-                value="1" 
-                aria-label="Número de nomes a sortear"
-                class="w-20 p-2 border border-4 rounded-md text-center"
-            >
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden hidden bg-violet-600">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block text-white hover:bg-violet-500 px-3 py-2 rounded">Home</a>
+                <a href="#como-usar" class="block text-white hover:bg-violet-500 px-3 py-2 rounded">Como Usar</a>
+                <a href="#faq" class="block text-white hover:bg-violet-500 px-3 py-2 rounded">FAQ</a>
+            </div>
         </div>
-        
-        <div class="flex space-x-4 justify-center pb-4">
-            <button 
-                id="drawButton" 
-                aria-label="Realizar sorteio"
-                class="bg-violet-600 text-white py-2 px-4 rounded-md hover:bg-violet-700 transition duration-300"
-            >
-                Sortear
-            </button>
-            <button 
-                id="clearButton" 
-                aria-label="Limpar lista de nomes"
-                class="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-400 transition duration-300"
-            >
-                Limpar Nomes
-            </button>
-        </div>
-        
-        <div 
-            id="resultArea" 
-            aria-live="polite"
-            aria-relevant="additions"
-            class="mt-6 flex flex-wrap justify-center gap-2"
-        ></div>
-    </div>
+    </nav>
 
-<!-- Schema.org Markup -->
-<script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Sorteador de Nomes Online",
-        "description": "Ferramenta gratuita para sortear nomes de forma simples e rápida",
-        "applicationCategory": "Utilidade",
-        "operatingSystem": "All"
-    }
-</script>
+   <!-- Conteúdo Principal -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="w-full max-w-xl bg-white shadow rounded-xl p-6 m-2 mx-auto" role="main" aria-label="Área de sorteio de nomes">
+            <!-- Conteúdo existente do sorteador de nomes... (mantido do código original) -->
+            <div class="flex justify-center items-center">
+                <img width="75" height="75" style="margin-left: -15px;" src="/img/logo.png"/>
+                <h1 class="text-3xl mt-6 text-violet-700 font-bold text-center mb-6 text-gray-600" id="page-title">Sorteio de Nomes</h1>
+            </div>      
+            <h3 class="text-center text-gray-500 pb-4">Carregue arquivos .csv ou .txt.</h3>
+        
+            <div class="mb-4 flex justify-center items-center space-x-4">
+                
+                <label for="fileUpload" class="sr-only">Carregar arquivo de nomes</label>
+                <input 
+                    type="file" 
+                    id="fileUpload" 
+                    accept=".csv,.txt"
+                    class="text-sm text-gray-500 
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-full file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-violet-50 file:text-violet-700
+                        hover:file:bg-violet-100"
+                >
+                <span id="fileInfo" class="text-sm text-gray-600"></span>
+            </div>
+        
+            <label for="namesInput" class="sr-only"> Digite ou cole os nomes para sorteio</label>
+            <textarea 
+                id="namesInput" 
+                placeholder="Digite os nomes (um por linha ou separados por vírgula)"
+                aria-describedby="names-input-hint"
+                class="w-full h-32 p-2 mb-4 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-violet-300"
+            ></textarea>
+            <p id="names-input-hint" class="text-xs text-gray-500 mb-2">Insira um nome por linha ou separados por vírgula</p>
+            
+            <div class="flex items-center justify-between mb-4">
+                <label for="drawCount" class="text-sm text-gray-700 mr-2">Quantidade de nomes:</label>
+                <input 
+                    type="number" 
+                    id="drawCount" 
+                    min="1" 
+                    value="1" 
+                    aria-label="Número de nomes a sortear"
+                    class="w-20 p-2 border border-4 border-violet-200 hover:border-violet-500 rounded-md text-center"
+                >
+            </div>
+            
+            <div class="flex space-x-4 justify-center pb-4">
+                <button 
+                    id="drawButton" 
+                    aria-label="Realizar sorteio"
+                    class="bg-violet-600 text-white py-2 px-4 rounded-md hover:bg-violet-700 transition duration-300"
+                >
+                    Sortear
+                </button>
+                <button 
+                    id="clearButton" 
+                    aria-label="Limpar lista de nomes"
+                    class="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-400 transition duration-300"
+                >
+                    Limpar Nomes
+                </button>
+            </div>
+            
+            <div 
+                id="resultArea" 
+                aria-live="polite"
+                aria-relevant="additions"
+                class="mt-6 flex flex-wrap justify-center gap-2"
+            ></div>
+        </div> 
+        <!-- Seção de FAQ -->
+        <div id="faq" class="mt-12 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-6 text-violet-700">Perguntas Frequentes</h2>
+            <div class="space-y-4">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold text-violet-600 mb-2">Como funciona o sorteio?</h3>
+                    <p class="text-gray-600">O sorteio é totalmente aleatório e baseado em um algoritmo que mistura os nomes de forma randômica. Isso garante que cada nome tenha a mesma chance de ser selecionado, independentemente da ordem em que foram inseridos. O sistema não guarda nem utiliza quaisquer informações pessoais dos participantes.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold text-violet-600 mb-2">Que tipos de arquivos posso carregar?</h3>
+                    <p class="text-gray-600">Você pode carregar arquivos CSV ou TXT contendo uma lista de nomes. Basta selecionar o arquivo e ele será automaticamente processado e adicionado à lista de participantes. Os nomes podem estar separados por vírgula ou em linhas diferentes no arquivo.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold text-violet-600 mb-2">Por que o sorteio é confiável?</h3>
+                    <p class="text-gray-600">O algoritmo de sorteio utilizado garante total aleatoriedade na seleção dos nomes. Isso significa que cada nome tem a mesma probabilidade de ser escolhido, independentemente de qualquer característica ou ordem de entrada. O sistema não tem acesso a informações pessoais dos participantes, portanto, o sorteio é justo e imparcial.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold text-violet-600 mb-2">Posso usar o sorteador para qualquer tipo de evento?</h3>
+                    <p class="text-gray-600">Sim, o Sorteador de Nomes pode ser utilizado para uma ampla variedade de eventos e situações, como escolha de amigo secreto, seleção de participantes para workshops, sorteio de brindes em promoções, entre outros. A ferramenta é versátil e pode ser adaptada a diferentes necessidades de sorteio.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer com Ícones de Redes Sociais -->
+    <footer class="bg-violet-700 text-white py-6">
+        <div class="container mx-auto flex flex-col items-center">
+            <div class="flex space-x-4 mb-4">
+                <a href="https://github.com/seu-usuario" target="_blank" class="text-white hover:text-violet-200 transition">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/seu-perfil" target="_blank" class="text-white hover:text-violet-200 transition">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-sm">&copy; 2024 Sorteador de Nomes. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Sorteador de Nomes Online",
+            "description": "Ferramenta gratuita para sortear nomes de forma simples e rápida",
+            "applicationCategory": "Utilidade",
+            "operatingSystem": "All"
+        }
+    </script>
 <!-- Biblioteca de Confetes -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -263,6 +336,16 @@
                     nameElement.removeClass('opacity-0');
                 }, index * 500); // Delay entre cada nome
             });
+        });
+    });
+
+    // Código JavaScript para o Menu Mobile
+    $(document).ready(function() {
+        // Código de sorteio existente...
+
+        // Toggle Menu Mobile
+        $('#mobile-menu-toggle').on('click', function() {
+            $('#mobile-menu').toggleClass('hidden');
         });
     });
 </script>
