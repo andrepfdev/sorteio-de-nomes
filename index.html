@@ -18,7 +18,7 @@
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
     
-    <!-- Canonical URL (substituir pela URL real) -->
+    <!-- Canonical URL -->
     <link rel="canonical" href="https://sorteianomes.com.br">
     
     <!-- Tailwind CSS -->
@@ -38,8 +38,8 @@
                 <a href="/"><img width="50" height="50" src="https://img.icons8.com/external-others-nixx-design/67/FFFFFF/external-dice-game-solid-others-nixx-design.png" alt="Logo Sorteador de Nomes"/></a>
             </div>
             <div class="hidden md:flex space-x-4">
-                <a href="/" class="hover:text-violet-200 transition">Home</a>
-                <a href="#como-usar" class="hover:text-violet-200 transition">Como Usar</a>
+                <a href="/" class="hover:text-violet-200 transition">Início</a>
+                <a href="https://www.linkedin.com/in/andrepf7/" target="_blank" class="hover:text-violet-200 transition">Autor</a>
                 <a href="#faq" class="hover:text-violet-200 transition">FAQ</a>
             </div>
             <!-- Mobile Menu Toggle -->
@@ -52,8 +52,8 @@
         <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="md:hidden hidden bg-violet-600">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#home" class="block text-white hover:bg-violet-500 px-3 py-2 rounded">Home</a>
-                <a href="#como-usar" class="block text-white hover:bg-violet-500 px-3 py-2 rounded">Como Usar</a>
+                <a href="/" class="block text-white hover:bg-violet-500 px-3 py-2 rounded">Início</a>
+                <a href="https://www.linkedin.com/in/andrepf7/" target="_blank" class="block text-white hover:bg-violet-500 px-3 py-2 rounded">Autor</a>
                 <a href="#faq" class="block text-white hover:bg-violet-500 px-3 py-2 rounded">FAQ</a>
             </div>
         </div>
@@ -151,6 +151,10 @@
                     <h3 class="text-xl font-semibold text-violet-600 mb-2">Posso usar o sorteador para qualquer tipo de evento?</h3>
                     <p class="text-gray-600">Sim, o Sorteador de Nomes pode ser utilizado para uma ampla variedade de eventos e situações, como escolha de amigo secreto, seleção de participantes para workshops, sorteio de brindes em promoções, entre outros. A ferramenta é versátil e pode ser adaptada a diferentes necessidades de sorteio.</p>
                 </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-xl font-semibold text-violet-600 mb-2">Aceita lista de nomes do Excel?</h3>
+                    <p class="text-gray-600">Claro, o segredo é salvar o seu arquivo do excel no formato CSV. Pronto, depois basta logar aqui e deixar a mágica do sorteio acontecer.</p>
+                </div>
             </div>
         </div>
     </main>
@@ -159,10 +163,10 @@
     <footer class="bg-violet-700 text-white py-6">
         <div class="container mx-auto flex flex-col items-center">
             <div class="flex space-x-4 mb-4">
-                <a href="https://github.com/seu-usuario" target="_blank" class="text-white hover:text-violet-200 transition">
+                <a href="https://github.com/andrepfdev" target="_blank" class="text-white hover:text-violet-200 transition">
                     <i class="fab fa-github text-2xl"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/seu-perfil" target="_blank" class="text-white hover:text-violet-200 transition">
+                <a href="https://www.linkedin.com/in/andrepf7/" target="_blank" class="text-white hover:text-violet-200 transition">
                     <i class="fab fa-linkedin text-2xl"></i>
                 </a>
             </div>
@@ -269,6 +273,7 @@
         // Botão de limpar nomes
         $('#clearButton').on('click', function () {
             $('#namesInput').val('');
+            $('#drawCount').val(1);
             $('#fileUpload').val('');
             $('#fileInfo').text('');
             $('#resultArea').empty();
