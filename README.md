@@ -1,6 +1,7 @@
 # 🎲 Sorteador de Nomes Online
 
-![sorteio](https://github.com/user-attachments/assets/99bcfcdc-d4e7-4b5a-9258-ac5bc3c1d3fb)
+![sorteio](https://github.com/user-attachments/assets/f7442740-74b6-49bf-83b5-6bd3178faa54)
+
 
 ## 📝 Descrição do Projeto
 
