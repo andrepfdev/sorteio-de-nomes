@@ -1,6 +1,6 @@
 # 🎲 Sorteador de Nomes Online
 
-![Firefox_Screenshot_2024-12-18T20-45-00 107Z](https://github.com/user-attachments/assets/5b63156b-6159-41c0-9f5c-fc6efadc36f4)
+![sorteio](https://github.com/user-attachments/assets/99bcfcdc-d4e7-4b5a-9258-ac5bc3c1d3fb)
 
 ## 📝 Descrição do Projeto
 
