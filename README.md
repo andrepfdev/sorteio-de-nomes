@@ -1,7 +1,6 @@
 # 🎲 Sorteador de Nomes Online
 
-![sorteio-bg](https://github.com/user-attachments/assets/dbb522b7-ac65-460e-98c5-e57cf5804e03)
-
+<img src="https://github.com/user-attachments/assets/dbb522b7-ac65-460e-98c5-e57cf5804e03" width="500px">
 
 ## 📝 Descrição do Projeto
 
