@@ -1,5 +1,7 @@
 # 🎲 Sorteador de Nomes Online
 
+![Firefox_Screenshot_2024-12-18T20-45-00 107Z](https://github.com/user-attachments/assets/5b63156b-6159-41c0-9f5c-fc6efadc36f4)
+
 ## 📝 Descrição do Projeto
 
 Sorteador de Nomes é uma aplicação web simples e intuitiva para realizar sorteios aleatórios de nomes. Permite carregar arquivos CSV/TXT ou digitar nomes manualmente, ideal para eventos como amigo secreto, seleção de participantes e outros sorteios.
