@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://sorteianomes.com.br/sitemap.xml
+
+# Crawl delay to prevent server overload
+Crawl-delay: 1
