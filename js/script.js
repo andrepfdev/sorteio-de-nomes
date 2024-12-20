@@ -1,39 +1,4 @@
 $(document).ready(function () {
-    // Função de confete com diferentes efeitos
-    function fireConfetti(type = 'default') {
-        const configs = {
-            default: {
-                particleCount: 200,
-                spread: 70,
-                origin: { y: 0.6 }
-            },
-            burst: {
-                particleCount: 300,
-                spread: 140,
-                startVelocity: 30,
-                origin: { y: 0.6 }
-            },
-            cannon: {
-                particleCount: 500,
-                spread: 180,
-                angle: 60,
-                origin: { x: 0.3, y: 0.6 }
-            }
-        };
-
-        const colors = [
-            '#26ccff', '#a25afd', '#ff5e7e',
-            '#88ff5a', '#fcff42', '#ffa62b'
-        ];
-
-        confetti({
-            ...configs[type],
-            colors: colors,
-            // Adiciona alguns efeitos de partículas diferentes
-            shapes: ['square', 'circle'],
-            scalar: 1.2
-        });
-    }
 
     // Função para processar arquivo CSV ou TXT (mantida do código anterior)
     function processFile(file) {
